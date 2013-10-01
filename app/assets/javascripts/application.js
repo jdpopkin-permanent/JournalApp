@@ -23,4 +23,3 @@
 //= require_tree .
 //
 
-console.log("Application.js");

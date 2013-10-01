@@ -4,11 +4,7 @@ JNL.Views.PostsIndexView = Backbone.View.extend({
 
     var $ul = $("<ul></ul>");
 
-    console.log((that.collection));
-
-
     _(that.collection).each(function (post) {
-      console.log(post);
       var $li = $("<li id='" + post["id"] + "'></li>").text(post["title"])
       var $button = $("<button class='delete-button' data-id='" + post["id"] + "'>Delete</button>")
 

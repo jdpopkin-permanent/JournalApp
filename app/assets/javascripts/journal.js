@@ -1,5 +1,3 @@
-console.log("HELLO");
-
 window.JNL = {
   Models: {},
   Collections: {},
@@ -14,6 +12,9 @@ window.JNL = {
     });
 
     $rootEl.html(postsIndexView.render().$el);
+
+    new JNL.Routers.PostsRouter($rootEl, postsData);
+    Backbone.history.start();
 
   }
 };
