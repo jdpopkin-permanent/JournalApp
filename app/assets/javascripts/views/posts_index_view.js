@@ -1,12 +1,23 @@
 JNL.Views.PostsIndexView = Backbone.View.extend({
+  initialize: function() {
+    var that = this;
+
+    var renderCallback = that.render.bind(that);
+
+    that.listenTo(that.collection, "add", renderCallback);
+    that.listenTo(that.collection, "change:title", renderCallback);
+    that.listenTo(that.collection, "remove", renderCallback);
+    that.listenTo(that.collection, "reset", renderCallback);
+  },
+
   render: function() {
     var that = this;
 
     var $ul = $("<ul></ul>");
 
-    _(that.collection).each(function (post) {
-      var $li = $("<li id='" + post["id"] + "'></li>").text(post["title"])
-      var $button = $("<button class='delete-button' data-id='" + post["id"] + "'>Delete</button>")
+    _(that.collection.models).each(function (post) {
+      var $li = $("<li id='" + post.attributes["id"] + "'></li>").text(post.attributes["title"])
+      var $button = $("<button class='delete-button' data-id='" + post.attributes["id"] + "'>Delete</button>")
 
       $li.append($button);
       $ul.append($li);

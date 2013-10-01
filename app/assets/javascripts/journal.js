@@ -7,13 +7,14 @@ window.JNL = {
   initialize: function ($rootEl, postsData) {
     var posts = new JNL.Collections.Posts(postsData);
 
-    var postsIndexView = new JNL.Views.PostsIndexView({
-      collection: postsData
-    });
+    // var postsIndexView = new JNL.Views.PostsIndexView({
+//       collection: postsData
+//     });
 
-    $rootEl.html(postsIndexView.render().$el);
+    //$rootEl.html(postsIndexView.render().$el);
 
-    new JNL.Routers.PostsRouter($rootEl, postsData);
+    console.log(posts);
+    new JNL.Routers.PostsRouter($rootEl, posts);
     Backbone.history.start();
 
   }

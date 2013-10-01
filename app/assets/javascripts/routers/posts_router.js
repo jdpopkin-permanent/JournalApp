@@ -6,13 +6,16 @@ JNL.Routers.PostsRouter = Backbone.Router.extend({
 
   routes: {
     "": "index",
+    "posts/new": "new",
     "posts/:id": "show",
     "posts/:id/edit": "edit"
+
   },
 
   index: function() {
     var that = this;
 
+    console.log(that.posts);
     var postsIndexView = new JNL.Views.PostsIndexView({
       collection: that.posts
     });
@@ -56,6 +59,16 @@ JNL.Routers.PostsRouter = Backbone.Router.extend({
         console.log("Failed");
       }
     });
+
+  },
+
+  new: function() {
+    var that = this;
+
+    var post = new JNL.Models.Post({});
+    var postFormView = new JNL.Views.PostFormView();
+    postFormView.post = post;
+    that.$rootEl.html(postFormView.render().$el);
 
   }
 });

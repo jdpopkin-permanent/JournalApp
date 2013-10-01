@@ -13,10 +13,10 @@ JNL.Views.PostFormView = Backbone.View.extend({
   },
 
   events: {
-    "click .submit-edit": "submitEdit"
+    "click .submit": "submit"
   },
 
-  submitEdit: function(event) {
+  submit: function(event) {
     event.preventDefault();
 
     var that = this;
@@ -38,7 +38,8 @@ JNL.Views.PostFormView = Backbone.View.extend({
     newPost.save({}, {
       success: function() {
         // cf router for show
-      Backbone.history.navigate("#/");
+        //add to post collection
+        Backbone.history.navigate("", {trigger: true});
       },
 
       error: function(model, xhr) {

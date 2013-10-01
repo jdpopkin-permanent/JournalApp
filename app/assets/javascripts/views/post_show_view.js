@@ -19,6 +19,6 @@ JNL.Views.PostShowView = Backbone.View.extend({
   backToIndex: function(event) {
     event.preventDefault();
 
-    Backbone.history.navigate("#/");
+    Backbone.history.navigate("");
   }
 });

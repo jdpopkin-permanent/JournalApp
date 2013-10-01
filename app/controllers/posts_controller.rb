@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   respond_to :json
 
+  def new
+    @post = Post.new
+    render json: @post
+  end
+
   def create
     @post = Post.new(params[:post])
     if @post.save
