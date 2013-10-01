@@ -25,8 +25,14 @@ JNL.Views.PostsIndexView = Backbone.View.extend({
   },
 
   deletePost: function(event) {
-    removableLi = event.target;
-    $(removableLi).parent().remove();
+    var button = event.target;
+    var $removableLi = $(button).parent();
+
+    var postId = parseInt($removableLi.attr("id"));
+    var post = new JNL.Models.Post({ id: postId });
+    post.destroy();
+
+    $removableLi.remove();
   }
 
 });
