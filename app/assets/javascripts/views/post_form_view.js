@@ -17,22 +17,18 @@ JNL.Views.PostFormView = Backbone.View.extend({
   },
 
   submit: function(event) {
-    console.log(this.collection);
     event.preventDefault();
 
     var that = this;
-    console.log("Got here.");
 
     var $form = $(event.target);
-
-
 
     that.post.save($form.serializeJSON(), {
       success: function() {
         if (!that.collection.findWhere({id: that.post.id})) {
           that.collection.add(that.post);
         }
-
+        console.log(that.post);
         // cf router for show
         //add to post collection
         Backbone.history.navigate("", {trigger: true});

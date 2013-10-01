@@ -5,14 +5,14 @@ JNL.Views.PostsIndexView = Backbone.View.extend({
     var renderCallback = that.render.bind(that);
 
     that.listenTo(that.collection, "add", renderCallback);
-    that.listenTo(that.collection, "change:title", renderCallback);
+    that.listenTo(that.collection, "change", renderCallback);
     that.listenTo(that.collection, "remove", renderCallback);
     that.listenTo(that.collection, "reset", renderCallback);
   },
 
   render: function() {
     var that = this;
-
+    console.log("HERE");
     var $ul = $("<ul></ul>");
 
     _(that.collection.models).each(function (post) {
