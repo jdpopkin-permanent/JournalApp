@@ -3,7 +3,7 @@ JNL.Views.PostFormView = Backbone.View.extend({
     var that = this;
 
     // find post in some way
-    console.log(that.post.attributes);
+    //console.log(that.post.attributes);
     var renderedContent = JST["posts/form"]({
       body: that.post.attributes.body,
       title: that.post.attributes.title
@@ -13,30 +13,26 @@ JNL.Views.PostFormView = Backbone.View.extend({
   },
 
   events: {
-    "click .submit": "submit"
+    "submit form.post-form": "submit"
   },
 
   submit: function(event) {
+    console.log(this.collection);
     event.preventDefault();
 
     var that = this;
     console.log("Got here.");
 
-    var form = $(event.target).parent();
-    var inputs = $(form).children().children();
-    //text and body form inputs
-    var $title = $(inputs[0]);
-    var $body = $(inputs[1]);
+    var $form = $(event.target);
 
-    var newTitle = $title.val();
-    var newBody = $body.val(); // problem: carriage return issue
 
-    var newId = that.post.id;
 
-    var newPost = new JNL.Models.Post({id: newId, title: newTitle, body: newBody});
-
-    newPost.save({}, {
+    that.post.save($form.serializeJSON(), {
       success: function() {
+        if (!that.collection.findWhere({id: that.post.id})) {
+          that.collection.add(that.post);
+        }
+
         // cf router for show
         //add to post collection
         Backbone.history.navigate("", {trigger: true});
@@ -44,7 +40,7 @@ JNL.Views.PostFormView = Backbone.View.extend({
 
       error: function(model, xhr) {
         var postFormView = new JNL.Views.PostFormView();
-        postFormView.post = newPost;
+        postFormView.post = that.post;
         console.log(xhr.responseText);
 
         that.$el.html(postFormView.render().$el);

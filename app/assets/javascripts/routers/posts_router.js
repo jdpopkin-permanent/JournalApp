@@ -50,7 +50,9 @@ JNL.Routers.PostsRouter = Backbone.Router.extend({
     var post = new JNL.Models.Post({id: id});
     post.fetch({
       success: function() {
-        var postFormView = new JNL.Views.PostFormView();
+        var postFormView = new JNL.Views.PostFormView({
+          collection: that.posts
+        });
         postFormView.post = post;
         that.$rootEl.html(postFormView.render().$el);
       },
@@ -66,7 +68,9 @@ JNL.Routers.PostsRouter = Backbone.Router.extend({
     var that = this;
 
     var post = new JNL.Models.Post({});
-    var postFormView = new JNL.Views.PostFormView();
+    var postFormView = new JNL.Views.PostFormView( {
+      collection: that.posts
+    });
     postFormView.post = post;
     that.$rootEl.html(postFormView.render().$el);
 

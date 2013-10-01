@@ -13,7 +13,7 @@ window.JNL = {
 
     //$rootEl.html(postsIndexView.render().$el);
 
-    console.log(posts);
+    //console.log(posts);
     new JNL.Routers.PostsRouter($rootEl, posts);
     Backbone.history.start();
 
