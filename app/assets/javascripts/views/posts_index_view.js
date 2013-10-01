@@ -21,6 +21,8 @@ JNL.Views.PostsIndexView = Backbone.View.extend({
   },
 
   deletePost: function(event) {
+    event.preventDefault();
+
     var button = event.target;
     var $removableLi = $(button).parent();
 

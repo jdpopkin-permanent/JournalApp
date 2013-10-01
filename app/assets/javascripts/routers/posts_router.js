@@ -52,7 +52,7 @@ JNL.Routers.PostsRouter = Backbone.Router.extend({
         that.$rootEl.html(postFormView.render().$el);
       },
 
-      failure: function() {
+      error: function() {
         console.log("Failed");
       }
     });
