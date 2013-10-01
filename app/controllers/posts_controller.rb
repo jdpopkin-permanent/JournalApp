@@ -15,6 +15,21 @@ class PostsController < ApplicationController
     render json: @posts
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update_attributes(params[:post])
+      render json: @post
+    else
+      render json: @post.errors, status: 422
+    end
+  end
+
   def destroy
     @post = Post.find(params[:id])
 
